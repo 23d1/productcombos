@@ -9,7 +9,6 @@ use yii\base\Module;
 use craft\events\RegisterComponentTypesEvent;
 use craft\commerce\services\OrderAdjustments;
 
-// use modules\productcombos\adjusters\LineItemAdjuster;
 use modules\productcombos\adjusters\OrderAdjuster;
 
 class ProductCombos extends Module
@@ -63,7 +62,6 @@ class ProductCombos extends Module
             function(RegisterComponentTypesEvent $event) {
                 array_unshift(
                     $event->types,
-                    // LineItemAdjuster::class,
                     OrderAdjuster::class
                 );
 
