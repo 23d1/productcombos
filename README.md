@@ -1,7 +1,7 @@
 # Product Combos
 ## Product Combo Discount Module for Craft 3 Commerce 2
 
-This is early alpha stages, only use as a starting point.
+This is early alpha stages, only use as a starting point. Help needed.
 
 The intent of this module is to check cart contents against a category group with the handle `productPacks`. Then based on the fields in each of the categories (specific product packs) apply a discount.
 
