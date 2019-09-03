@@ -42,12 +42,9 @@ class OrderAdjuster implements AdjusterInterface
             ->all();
 
         foreach ($categories as $category) {
-            // unset($adjustment);
             $adjustment = $this->_getEmptyOrderAdjustmentFor($order);
             $discount = 0;
 
-            // unset($relateditems);
-            // unset($relatedvariants);
             $relateditems = [];
             $relatedvariants = [];
 
@@ -71,7 +68,6 @@ class OrderAdjuster implements AdjusterInterface
                 $adjustment->amount = -$discount * $multiplier;
 
                 $adjustments[] = $adjustment;
-                // array_push($adjustments, $adjustment);
             }
         }
 
