@@ -44,21 +44,24 @@ class OrderAdjuster implements AdjusterInterface
         foreach ($categories as $category) {
             $adjustment = $this->_getEmptyOrderAdjustmentFor($order);
             $discount = 0;
+            $multiplier = 0;
 
             $relateditems = [];
             $relatedvariants = [];
 
             foreach ($category->relatedProducts->all() as $product) {
-                array_push($relateditems, $product);
+                $relateditems[] = $product;
             }
             foreach ($category->productVariants->all() as $variant) {
-                array_push($relatedvariants, $variant->id);
+                $relatedvariants[] = $variant->id;
             }
 
             if (!array_diff($relateditems, $items) && !array_diff($cartvariants, $relatedvariants)) {
-                $multiplier = 0;
                 if ($qty > 1) {
                     $multiplier = min($qty);
+                    if ($multiplier > 1) {
+                        $category->title .= ' (x'.$multiplier.')';
+                    }
                 }
 
                 $adjustment->description = $category->title;
@@ -66,7 +69,6 @@ class OrderAdjuster implements AdjusterInterface
 
                 // Set discount amount
                 $adjustment->amount = -$discount * $multiplier;
-
                 $adjustments[] = $adjustment;
             }
         }
